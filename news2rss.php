@@ -12,7 +12,7 @@ $page = new Dom();
 $page->loadFromUrl(NEWS_URL);
 
 $feed = new Feed();
-$feed->setTitle($page->find('title', 0)->text());
+$feed->setTitle(html_entity_decode($page->find('title', 0)->text()));
 $feed->setLink(NEWS_URL);
 $feed->setFeedLink('http://bits.deansas.org/jnhs.atom', 'atom');
 $feed->setCopyright('NHS Jobs');
@@ -30,9 +30,9 @@ foreach ($article_links as $article_link) {
     $entry = $feed->createEntry();
 
     $article_title = $article->find('h2', 0);
-    $entry->setTitle($article_title->text());
-    $entry->setLink($article_url);
-    $entry->setContent($article->find('.articleContent', 0)->innerHTML());
+    $entry->setTitle(html_entity_decode($article_title->text()));
+    $entry->setLink(html_entity_decode($article_url));
+    $entry->setContent(html_entity_decode($article->find('.articleContent', 0)->innerHTML()));
     $time_meta = $article->find('.posted', 0)->getChildren();
 
     $entry->setDateModified(strtotime($time_meta[3]));
@@ -46,4 +46,3 @@ foreach ($article_links as $article_link) {
 }
 
 print $feed->export('atom');
-
