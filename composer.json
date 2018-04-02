@@ -1,4 +1,8 @@
 {
+    "name": "dsas/jnhsatom",
+    "autoload": {
+        "psr-4": {"dsas\\jnhsatom\\": "src/"}
+    },
     "require": {
         "paquettg/php-html-parser": "^1.7",
         "zendframework/zend-feed": "^2.7"
